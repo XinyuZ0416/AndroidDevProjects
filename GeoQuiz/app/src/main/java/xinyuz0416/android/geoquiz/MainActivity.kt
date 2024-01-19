@@ -1,27 +1,20 @@
 package xinyuz0416.android.geoquiz
 
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Toast
+import android.os.*
+import android.util.*
+import android.view.*
+import android.widget.*
+import androidx.activity.*
 import xinyuz0416.android.geoquiz.databinding.ActivityMainBinding
 
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
-    //    use viewBinding
+    //    viewBinding
     private lateinit var binding: ActivityMainBinding
-
-    private val questionBank = listOf(
-        Question(R.string.question_australia, true),
-        Question(R.string.question_oceans, true),
-        Question(R.string.question_mideast, false),
-        Question(R.string.question_africa, false),
-        Question(R.string.question_americas, true),
-        Question(R.string.question_asia, true))
-
-    private var currentIndex = 0
+    //    property delegate
+    private val quizViewModel: QuizViewModel by viewModels()
 
 
 
@@ -30,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG,"onCreate(Bundle?) called")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d(TAG,"Got a QuizViewModel: $quizViewModel")
 
         updateQuestion()
 
@@ -41,33 +35,31 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(false)
         }
         binding.nextButton.setOnClickListener {
-            currentIndex = (currentIndex + 1) % questionBank.size
+            quizViewModel.moveToNext()
             updateQuestion()
         }
         binding.prevButton.setOnClickListener {
-            if(currentIndex == 0){
-                currentIndex = questionBank.size -1
-            }else{
-                currentIndex = (currentIndex - 1) % questionBank.size
-            }
+            quizViewModel.moveToPrev()
             updateQuestion()
         }
 
         binding.questionTextView.setOnClickListener {
-            currentIndex = (currentIndex + 1) % questionBank.size
+            quizViewModel.moveToNext()
             updateQuestion()
         }
 
     }
 
 
+
+
     private fun updateQuestion(){
-        val questionResId = questionBank[currentIndex].textResId
+        val questionResId = quizViewModel.currentQuestionText
         binding.questionTextView.setText(questionResId)
     }
 
     private fun checkAnswer(userAnswer: Boolean){
-        val correctAnswer = questionBank[currentIndex].answer
+        val correctAnswer = quizViewModel.currentQuestionAnswer
         val messageResId = if(userAnswer == correctAnswer) R.string.correct_toast else R.string.incorrect_toast
         Toast.makeText(this,messageResId, Toast.LENGTH_SHORT).show()
 
