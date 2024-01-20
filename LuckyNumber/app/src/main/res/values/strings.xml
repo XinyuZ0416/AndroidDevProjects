@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">LuckyNumber</string>
+    <string name="welcome">What would be your \nlucky number?</string>
+    <string name="hint">Enter Name</string>
+    <string name="button">Wish Me Luck!</string>
+</resources>
