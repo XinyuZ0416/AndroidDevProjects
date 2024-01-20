@@ -3,7 +3,6 @@ package xinyuz0416.android.geoquiz
 import android.util.*
 import androidx.lifecycle.*
 
-private const val TAG = "QuizViewModel"
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 
 class QuizViewModel (private val savedStateHandle: SavedStateHandle) : ViewModel() {
