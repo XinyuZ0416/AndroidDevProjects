@@ -1,23 +1,33 @@
 package xinyuz0416.android.geoquiz
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.*
 import android.util.*
 import android.view.*
 import android.widget.*
 import androidx.activity.*
+import androidx.activity.result.contract.ActivityResultContracts
 import xinyuz0416.android.geoquiz.databinding.ActivityMainBinding
 
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
-    //    viewBinding
+
     private lateinit var binding: ActivityMainBinding
     //    property delegate
     private val quizViewModel: QuizViewModel by viewModels()
+    //    register MainActivity for an ActivityResult to hear back from CheatActivity to know if user cheated
+    private val cheatLauncher = registerForActivityResult(
+                                    ActivityResultContracts.StartActivityForResult()
+                                ){result-> //handle the result
+                                    if(result.resultCode == Activity.RESULT_OK){
+                                        quizViewModel.isCheater = true
+                                    }
+                                }
 
-
-
+    //    —————————————————————————————— onCreate —————————————————————————————————————
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG,"onCreate(Bundle?) called")
@@ -27,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         updateQuestion()
 
-//        set button actions
+
         binding.trueButton.setOnClickListener {view: View ->
             checkAnswer(true)
         }
@@ -42,6 +52,13 @@ class MainActivity : AppCompatActivity() {
             quizViewModel.moveToPrev()
             updateQuestion()
         }
+        binding.cheatButton.setOnClickListener {
+            // Start CheatActivity
+            val answerIsTrue = quizViewModel.currentQuestionAnswer //get the current answer
+            val intent = CheatActivity.newIntent(this@MainActivity,answerIsTrue) //create an intent while passing in current answer
+            cheatLauncher.launch(intent) //start activity for result
+        }
+
 
         binding.questionTextView.setOnClickListener {
             quizViewModel.moveToNext()
@@ -60,7 +77,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAnswer(userAnswer: Boolean){
         val correctAnswer = quizViewModel.currentQuestionAnswer
-        val messageResId = if(userAnswer == correctAnswer) R.string.correct_toast else R.string.incorrect_toast
+
+        val messageResId = when{
+            quizViewModel.isCheater -> R.string.judgment_toast
+            userAnswer == correctAnswer -> R.string.correct_toast
+            else -> R.string.incorrect_toast
+        }
         Toast.makeText(this,messageResId, Toast.LENGTH_SHORT).show()
 
     }
