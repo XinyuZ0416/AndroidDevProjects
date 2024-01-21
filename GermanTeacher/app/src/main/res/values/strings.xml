@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GermanTeacher</string>
+    <string name="intro">Click to Listen</string>
+    <string name="black">black</string>
+    <string name="green">green</string>
+    <string name="purple">purple</string>
+    <string name="red">red</string>
+    <string name="yellow">yellow</string>
+</resources>
