@@ -1,25 +1,23 @@
 package xinyuz0416.android.marketproducts;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.*;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class MainActivity extends AppCompatActivity implements ItemClickListener {
 
-    // 1- AdapterView
+    // AdapterView
     RecyclerView recyclerView;
 
-    // 2- Data Source
+    // Data Source
     List<Item> itemList;
 
-    // 3- Adapter
+    // Adapter
     MyAdapter myAdapter;
 
 

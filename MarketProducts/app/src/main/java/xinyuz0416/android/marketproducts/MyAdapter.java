@@ -1,11 +1,7 @@
 package xinyuz0416.android.marketproducts;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,11 +19,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         this.clickListener = myListener;
     }
 
-
-
-
-
-
     public MyAdapter(List<Item> itemList) {
         this.itemList = itemList;
     }
@@ -40,8 +31,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         View itemView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.item_layout,parent, false);
-
-
 
         return new MyViewHolder(itemView);
     }
@@ -79,11 +68,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
             description = itemView.findViewById(R.id.description_text);
 
             itemView.setOnClickListener(this);
-
-
-
-
-
         }
 
         @Override

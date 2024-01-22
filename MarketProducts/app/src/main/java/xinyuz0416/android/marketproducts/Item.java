@@ -1,6 +1,6 @@
 package xinyuz0416.android.marketproducts;
 
-// This class acting as model class for our recyclerview
+// Model class for recyclerview
 public class Item {
     int itemImg;
     String itemName, itemDesc;
