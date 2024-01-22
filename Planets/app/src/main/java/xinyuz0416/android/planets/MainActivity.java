@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 
 import java.util.ArrayList;
 
@@ -20,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1- AdapterView: a ListView
+        // AdapterView: a ListView
         listView  = findViewById(R.id.listview);
 
-        // 2- Data Source: ArrayList<Planet>
+        // Data Source: ArrayList<Planet>
         planetsArrayList = new ArrayList<>();
 
         Planet planet3 = new Planet("Earth","1 Moon",R.drawable.earth);
@@ -54,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Handling Click Events
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
     }

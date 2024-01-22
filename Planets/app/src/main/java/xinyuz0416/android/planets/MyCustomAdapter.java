@@ -1,22 +1,14 @@
 package xinyuz0416.android.planets;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.*;
 
 import java.util.ArrayList;
 
 public class MyCustomAdapter extends ArrayAdapter<Planet> {
-
-    // Using Custom Layouts --> MyCustomAdapter
-    // Using Custom Objects --> extends ArrayAdapter<Planet>
 
     private ArrayList<Planet> planetsArrayList;
     Context context;
@@ -27,9 +19,6 @@ public class MyCustomAdapter extends ArrayAdapter<Planet> {
         this.context = context;
     }
 
-    // View Holder Class: used to cache references to the views within
-    //                    an item layout, so that they don't need to be
-    //                    repeatedly looked up during scrolling
 
     private static class MyViewHolder{
         TextView planetName;
@@ -38,16 +27,14 @@ public class MyCustomAdapter extends ArrayAdapter<Planet> {
 
     }
 
-    // getView(): used to create and return a view for a
-    //            specific item in the list.
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        // 1- Get the planet object for the current position
+        // Get the planet object for the current position
         Planet planets = getItem(position);
 
-        // 2- Inflate Layout:
+        // Inflate Layout:
         MyViewHolder myViewHolder;
         final View result;
 
@@ -80,10 +67,6 @@ public class MyCustomAdapter extends ArrayAdapter<Planet> {
         myViewHolder.planetImg.setImageResource(planets.getPlanetImage());
 
         return result;
-
-
-
-
 
     }
 }
