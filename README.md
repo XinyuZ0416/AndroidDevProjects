@@ -1,2 +1,2 @@
 # AndroidDevProjects
-Apps i made following tutorials to practice android dev
+Apps i made learning from tutorials
