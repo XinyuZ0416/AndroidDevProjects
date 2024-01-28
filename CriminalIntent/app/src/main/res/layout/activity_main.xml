@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_container"
-    android:name="xinyuz0416.android.criminalintent.CrimeDetailFragment"
+    android:name="xinyuz0416.android.criminalintent.CrimeListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"/>
